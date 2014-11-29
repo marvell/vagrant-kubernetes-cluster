@@ -1,0 +1,6 @@
+kind: Minion
+apiVersion: v1beta1
+id: 192.168.100.11
+hostIP: 192.168.100.11
+labels:
+  name: node-1

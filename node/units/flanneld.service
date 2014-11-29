@@ -1,0 +1,17 @@
+[Unit]
+Description=flannel is an etcd backed overlay network for containers
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+EnvironmentFile=/run/kube.env
+ExecStartPre=-/usr/bin/mkdir -p /opt/bin
+ExecStartPre=/usr/bin/wget -N -P /opt/bin https://storage.googleapis.com/k8s/flanneld
+ExecStartPre=/usr/bin/chmod +x /opt/bin/flanneld
+ExecStart=/opt/bin/flanneld -iface=${PUBLIC_IP} -etcd-endpoints=${ETCD_PEERS}
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

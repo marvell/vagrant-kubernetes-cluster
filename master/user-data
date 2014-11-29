@@ -1,0 +1,30 @@
+#cloud-config
+
+coreos:
+  etcd:
+    name: $public_ipv4
+    addr: $public_ipv4:4001
+    bind-addr: 0.0.0.0
+    peer-addr: $public_ipv4:7001
+    http-read-timeout: 86400
+    cluster-active-size: 1
+    snapshot: true
+  units:
+    - name: etcd.service
+      command: start
+    - name: kube-apiserver.service
+      command: start
+    - name: kube-scheduler.service
+      command: start
+    - name: kube-controller-manager.service
+      command: start
+    - name: setup-flanneld.service
+      command: start
+
+    - name: fleet.service
+      mask: true
+    - name: docker.service
+      mask: true
+  update:
+    group: alpha
+    reboot-strategy: off

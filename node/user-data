@@ -1,0 +1,19 @@
+#cloud-config
+
+coreos:
+  units:
+    - name: flanneld.service
+      command: start
+    - name: docker.service
+      command: start
+    - name: kube-proxy.service
+      command: start
+    - name: kube-kubelet.service
+      command: start
+    - name: etcd.service
+      mask: true
+    - name: fleet.service
+      mask: true
+  update:
+    group: alpha
+    reboot-strategy: off

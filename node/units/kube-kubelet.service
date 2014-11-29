@@ -1,0 +1,15 @@
+[Unit]
+Description=Kubernetes Kubelet
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+
+[Service]
+EnvironmentFile=/run/kube.env
+ExecStartPre=-/usr/bin/mkdir -p /opt/bin
+ExecStartPre=/usr/bin/wget -N -P /opt/bin https://storage.googleapis.com/kubernetes-release/release/v0.5.4/bin/linux/amd64/kubelet
+ExecStartPre=/usr/bin/chmod +x /opt/bin/kubelet
+ExecStart=/opt/bin/kubelet --address=0.0.0.0 --port=10250 --hostname_override=${PUBLIC_IP} --etcd_servers=${ETCD_PEERS} --logtostderr=true
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
