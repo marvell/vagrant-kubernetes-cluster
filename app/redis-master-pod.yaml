@@ -1,0 +1,18 @@
+kind: Pod
+apiVersion: v1beta1
+
+id: redis-master
+
+nodeSelector:
+  redis-master: true
+
+labels:
+  name: redis-master
+
+desiredState:
+  manifest:
+    id: redis-master
+    version: v1beta1
+    containers:
+      - name: redis
+        image: dock:5000/redis:2.8.17

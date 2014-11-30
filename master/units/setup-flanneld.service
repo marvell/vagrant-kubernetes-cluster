@@ -5,7 +5,7 @@ Requires=etcd.service
 After=etcd.service
 
 [Service]
-ExecStart=/usr/bin/etcdctl set /coreos.com/network/config '{"Network":"10.100.0.0/16", "Backend": {"Type": "vxlan"}}'
+ExecStart=/usr/bin/etcdctl set /coreos.com/network/config '{"Network":"10.10.0.0/16", "Backend": {"Type": "vxlan"}}'
 RemainAfterExit=yes
 Type=oneshot
 

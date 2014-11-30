@@ -1,0 +1,23 @@
+kind: ReplicationController
+apiVersion: v1beta1
+
+id: redis-slave-controller
+
+labels:
+  name: redis-slave-controller
+
+desiredState:
+  replicas: 2
+  replicaSelector:
+    name: redis-slave
+  podTemplate:
+    labels:
+      name: redis-slave
+      uses: redis-master
+    desiredState:
+      manifest:
+        version: v1beta1
+        id: redis-slave
+        containers:
+          - name: redis-slave
+            image: dock:5000/brendanburns/redis-slave

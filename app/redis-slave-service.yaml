@@ -1,0 +1,8 @@
+kind: Service
+apiVersion: v1beta1
+
+id: redis-slave
+port: 6379
+containerPort: 6379
+selector:
+  name: redis-slave

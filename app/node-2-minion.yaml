@@ -1,0 +1,9 @@
+kind: Minion
+apiVersion: v1beta1
+id: 10.0.0.12
+hostIP: 10.0.0.12
+labels:
+  name: node-2
+  front: true
+  back: true
+  redis-slave: true

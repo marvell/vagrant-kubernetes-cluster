@@ -1,0 +1,9 @@
+kind: Minion
+apiVersion: v1beta1
+id: 10.0.0.13
+hostIP: 10.0.0.13
+labels:
+  name: node-3
+  back: true
+  redis-slave: true
+  mysql: true

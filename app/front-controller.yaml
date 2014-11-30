@@ -1,0 +1,27 @@
+kind: ReplicationController
+apiVersion: v1beta1
+
+id: front-controller
+
+labels:
+  name: front-controller
+
+desiredState:
+  replicas: 2
+  replicaSelector:
+    name: front
+  podTemplate:
+    labels:
+      name: front
+      uses: back
+    desiredState:
+      manifest:
+        version: v1beta1
+        id: front
+        containers:
+          - name: front
+            image: dock:5000/tantal_front:0.3
+            ports:
+              - name: web
+                hostPort: 80
+                containerPort: 80

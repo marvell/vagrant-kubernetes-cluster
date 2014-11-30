@@ -1,0 +1,28 @@
+kind: ReplicationController
+apiVersion: v1beta1
+
+id: back-controller
+
+labels:
+  name: back-controller
+
+desiredState:
+  replicas: 3
+  replicaSelector:
+    name: back
+  podTemplate:
+    labels:
+      name: back
+      uses: mysql,redis-master,redis-slave
+    desiredState:
+      manifest:
+        version: v1beta1
+        id: back
+        containers:
+          - name: back
+            image: dock:5000/tantal_back:0.3
+            env:
+              - name: MYSQL_USER
+                value: root
+              - name: MYSQL_PASS
+                value: q1w2e3r4
